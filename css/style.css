@@ -37,6 +37,35 @@ span {
   font-weight: bold;
 }
 
+#game-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 75vw;
+  margin: 10px auto;
+  border: 2px solid red;
+}
+
+#category-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#clue-board {
+  flex-direction: column;
+  border: 2px solid red;
+}
+
+.clue-box {
+  display: flex;
+  border-radius: 5px;
+  margin: 5px;
+  height: 100px;
+  flex: 1;
+  border: 2px solid red;
+}
+
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/

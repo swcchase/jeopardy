@@ -1,25 +1,8 @@
-/******************************************
-/* CSS
-/*******************************************/
-
-/* Box Model Hack */
-* {
-  box-sizing: border-box;
-}
-
-/******************************************
-/* LAYOUT
-/*******************************************/
 body {
   box-sizing: border-box;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
   background-color: lightgray;
-}
-
-img {
-  display: block;
-  margin: 0 auto;
 }
 
 h1 {
@@ -43,7 +26,6 @@ span {
   flex-direction: column;
   width: 75vw;
   margin: 10px auto;
-  border: 2px solid red;
 }
 
 #category-row {
@@ -54,7 +36,6 @@ span {
 
 #clue-board {
   flex-direction: column;
-  border: 2px solid red;
 }
 
 .clue-row {
@@ -63,18 +44,25 @@ span {
 
 .clue-box {
   display: flex;
+  align-items: center; /*vertical*/
+  justify-content: center; /*horizontal*/
+  border: 2px solid white;
+  background-color: blue;
+  color: white;
   border-radius: 5px;
   margin: 5px;
+  font-size: 2rem;
+  font-weight: bold;
   height: 100px;
   flex: 1;
-  border: 2px solid red;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: white;
-  font-size: 2rem;
+  text-transform: uppercase;
 }
 
-/******************************************
-/* ADDITIONAL STYLES
-/*******************************************/
+.category-box {
+  font-size: 0.8rem;
+  line-height: 25px;
+}
+
+.clicked-box {
+  font-size: 1rem;
+}

@@ -1,3 +1,5 @@
+//INITIALIZE THE GAME BOARD ON PAGE LOAD
+initCatRow();
 initBoard();
 
 function initCatRow() {
@@ -13,7 +15,7 @@ function initCatRow() {
 function initBoard() {
   let board = document.getElementById("clue-board");
 
-  //generate 5 rows, then place 6 boxes in each row
+  //GENERATE 5 ROWS, THEN PLACE 6 BOXES IN EACH ROW
 
   for (let i = 0; i < 5; i++) {
     let row = document.createElement("div");
@@ -24,15 +26,15 @@ function initBoard() {
       let box = document.createElement("div");
       box.className = "clue-box";
       box.textContent = "$" + boxValue;
-
-      //box.appencChild(document.createTextMode(boxValue)) //
+      //box.appendChild( document.createTextNode(boxValue) ) //backwards compatible
       box.addEventListener("click", getClue, false);
       row.appendChild(box);
     }
+
     board.appendChild(row);
   }
+}
 
-  function getClue() {
-    console.log("Have a nice day.");
-  }
+function getClue() {
+  console.log("have a nice day");
 }

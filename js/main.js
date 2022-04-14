@@ -7,6 +7,16 @@ function initBoard() {
 
   for (let i = 0; i < 5; i++) {
     let row = document.createElement("div");
-    let boxValue = 
+    let boxValue = 200 * (i + 1);
+    row.className = "clue-row";
+
+    for (let j = 0; j < 6; j++) {
+      let box = document.createElement("div");
+      box.className = "clue-box";
+      box.textContent = "$" + boxValue;
+
+      //box.appencChild(document.createTextMode(boxValue)) //
+      box.addEventListener("click", getClue, false);
+    }
   }
 }

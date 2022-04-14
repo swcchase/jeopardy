@@ -57,6 +57,10 @@ span {
   border: 2px solid red;
 }
 
+.clue-row {
+  display: flex;
+}
+
 .clue-box {
   display: flex;
   border-radius: 5px;
@@ -64,6 +68,11 @@ span {
   height: 100px;
   flex: 1;
   border: 2px solid red;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 2rem;
 }
 
 /******************************************

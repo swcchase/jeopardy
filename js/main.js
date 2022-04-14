@@ -17,6 +17,12 @@ function initBoard() {
 
       //box.appencChild(document.createTextMode(boxValue)) //
       box.addEventListener("click", getClue, false);
+      row.appendChild(box);
     }
+    board.appendChild(row);
+  }
+
+  function getClue() {
+    console.log("Have a nice day.");
   }
 }

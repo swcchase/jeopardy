@@ -50,51 +50,13 @@ function randInt() {
   return Math.floor(Math.random() * 18418 + 1);
 }
 
-function buildCategories() {
-  const fetchReq1 = fetch(
-    `https://jservice.io/api/category?&id=${randInt()}`
-  ).then((res) => res.json());
-
-  const fetchReq2 = fetch(
-    `https://jservice.io/api/category?&id=${randInt()}`
-  ).then((res) => res.json());
-
-  const fetchReq3 = fetch(
-    `https://jservice.io/api/category?&id=${randInt()}`
-  ).then((res) => res.json());
-
-  const fetchReq4 = fetch(
-    `https://jservice.io/api/category?&id=${randInt()}`
-  ).then((res) => res.json());
-
-  const fetchReq5 = fetch(
-    `https://jservice.io/api/category?&id=${randInt()}`
-  ).then((res) => res.json());
-
-  const fetchReq6 = fetch(
-    `https://jservice.io/api/category?&id=${randInt()}`
-  ).then((res) => res.json());
-
-  const allData = Promise.all([
-    fetchReq1,
-    fetchReq2,
-    fetchReq3,
-    fetchReq4,
-    fetchReq5,
-    fetchReq6,
-  ]);
-
-  allData.then((res) => {
-    console.log(res);
-  });
-}
-
-function getClue() {
-  console.log("have a nice day");
-}
 let catArray = [];
 
 function buildCategories() {
+  if (!document.getElementById("category-row").firstChild) {
+    resetBoard();
+  }
+
   const fetchReq1 = fetch(
     `https://jservice.io/api/category?&id=${randInt()}`
   ).then((res) => res.json());
@@ -135,7 +97,23 @@ function buildCategories() {
   });
 }
 
-//LOAD CATEGORIES TO THE BOARD
+//RESET BOARD AND $$ AMOUNT IF NEEDED
+
+function resetBoard() {
+  let clueParent = doucment.getElementById("clue-board");
+  while (clueParent.firstChild) {
+    clueParent.removeChild(clueParent.firstChild);
+  }
+  let catParent = document.getElementById("category-row");
+  while (catParent.firstChild) {
+    catParent.removeChild(catParent.firstChild);
+    document.getElementById("score").innerText = 0;
+    initBoard();
+    initCatRow();
+  }
+}
+
+//LOAD CATEGORIES TO BOARD
 
 function setCategories(catArray) {
   let element = document.getElementById("category-row");
@@ -144,8 +122,6 @@ function setCategories(catArray) {
     children[i].innerHTML = catArray[i].title;
   }
 }
-
-//FIGURE OUT WHICH ITEM WAS CLICKED
 
 function getClue(event) {
   let child = event.currentTarget;
@@ -163,4 +139,32 @@ function getClue(event) {
   showQuestion(clue, child, boxValue);
 }
 
-//continue vod
+function showQuestion(clue, target, boxValue) {
+  let userAnswer = prompt(clue.question).toLowerCase();
+  let correctAnswer = clue.answer.toLowerCase().replace(/<\/?[^>]+(>|$)/g, "");
+  let possiblePoints = +boxValue;
+  target.innerHTML = clue.answer;
+  target.removeEventListener("click", getClue, false);
+  evaluateAnswer(userAnswer, correctAnswer, possiblePoints);
+}
+
+function evaluateAnswer(useranswer, correctAnswer, possiblePoints) {
+  let checkAnswer =
+    userAnswer == correctAnswer ? "You're Correct" : "That's Incorrect";
+  let confirmAnswer = confirm(
+    `For $${possiblePoints}, you answered "${userAnswer}", and the correct asnwer was "${correctAnswer}". Your answer appears to be ${checkAnswer}. Click OK to accept or click cancel if the answer was not evaluated properly. `
+  );
+  awardPoints(checkAnswer, confirmAnswer, possiblePoints);
+}
+
+// AWARD POINTS
+function awardPoints(checkAnswer, confirmAnswer, possiblePoints) {
+  if (!checkAnswer == "incorrect" && confirmAnswer == true) {
+    let target = document.getElementById("score");
+    let currentScore = +target.innerText;
+    currentScore += possiblePoints;
+    target.innerText = currentScore;
+  } else {
+    alert("No points awarded.");
+  }
+}
